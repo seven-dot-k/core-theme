@@ -102,6 +102,9 @@ define([
         },
         renderProductPicker: function () {
             var self = this;
+            if (window.quickOrderModalView) {
+                window.quickOrderModalView.handleDialogClose();
+            }
             Backbone.MozuView.prototype.render.apply(this, arguments);
             var productModalView = new ProductModalViews.ModalView({
                 el: self.$el.find("[mz-modal-product-dialog]"),
@@ -1395,7 +1398,12 @@ define([
         });
 
         quoteEditView.render();
-        quoteEditView.getAvailableShippingMethods();
+
+        var fulfillmentInfo = model.get('fulfillmentInfo');
+
+        if (fulfillmentInfo && fulfillmentInfo.fulfillmentContact) {
+            quoteEditView.getAvailableShippingMethods();
+        }
     });
 
 });
