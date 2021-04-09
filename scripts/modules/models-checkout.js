@@ -344,7 +344,8 @@
                 var me = this;
                 this.isLoading(true);
                 var order = this.getOrder();
-                if (order) {
+                var isVisaCheckout = this.get('paymentWorkflow') === 'VisaCheckout';
+                if (order && !isVisaCheckout && order.get('originalQuoteId') === "") {
                     order.apiModel.update({ fulfillmentInfo: me.toJSON() })
                         .then(function (o) {
                             var billingInfo = me.parent.get('billingInfo');
