@@ -114,9 +114,8 @@
           {%endif%}
 
           {% endif %}
-      {% endif %}
       
-
+      {% endfor %}
 
       <div class="mz-l-stack-section mz-paymentselector-separator mz-checkoutform">
             <p>
