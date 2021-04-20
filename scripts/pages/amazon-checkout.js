@@ -20,7 +20,10 @@ require(["modules/jquery-mozu","modules/backbone-mozu", "modules/eventbus","unde
 		},
 		render: function() {
 			Backbone.MozuView.prototype.render.call(this);
-			AmazonPay.addAddressWidget();
+
+			var isQuoteOrder = window.location.href.indexOf("quoteOrder") > 0;
+			if(!isQuoteOrder)
+				AmazonPay.addAddressWidget();
 			AmazonPay.addWalletWidget();
 
 		},
