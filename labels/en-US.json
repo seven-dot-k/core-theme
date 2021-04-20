@@ -841,5 +841,6 @@
   "yes": "Yes",
   "yourAccount": "Your Account",
   "yourOrderNumber": "Your order number is <strong>{0}</strong>.",
-  "memberProducts": "Member Products"
+  "memberProducts": "Member Products",
+  "delivery": "Delivery"
 }

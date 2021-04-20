@@ -681,5 +681,6 @@
   "yes": "Ja",
   "yourAccount": "Ihr Konto",
   "yourOrderNumber": "Ihre Bestellnummer lautet <strong> {0} </ strong>.",
-  "memberProducts": "Produits des membres(1)"
+  "memberProducts": "Produits des membres(1)",
+  "delivery": "Lieferung"
 }
