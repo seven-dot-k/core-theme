@@ -23,11 +23,11 @@ require(["modules/jquery-mozu","modules/backbone-mozu", "modules/eventbus","unde
 
 			var isQuoteOrder = window.location.href.indexOf("quoteOrder") > 0;
 			if(!isQuoteOrder)
-			{
-				AmazonPay.addAddressWidget();
+			{				
 				$("#amazonAddressBookWidgetTD").show();
 			}
 				
+			AmazonPay.addAddressWidget();
 			AmazonPay.addWalletWidget();
 
 		},

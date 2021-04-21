@@ -76,11 +76,7 @@ function($,EventBus, Api, hyprlivecontext, _) {
 					useAmazonAddressBook: true,
 					size: (!isCart ? "small" : "medium"),
 					authorization: function() {
-						var scope = "profile postal_code payments:widget";
-						if(!isQuoteOrder)
-							scope += " payments:shipping_address";							
-						scope += " payments:billing_address";
-						
+						var scope = "profile postal_code payments:widget payments:shipping_address payments:billing_address";
 						var loginOptions = {scope: scope, popup: self.usePopUp};
 						authRequest = window.amazon.Login.authorize (loginOptions,redirectUrl);
 					},
@@ -102,44 +98,19 @@ function($,EventBus, Api, hyprlivecontext, _) {
 
 	function loadWalletWidget(sellerId,awsReferenceId) {
 		var divId = "walletWidgetDiv";
-		var walletData = {};
-
-		var isQuoteOrder = window.location.href.indexOf("quoteOrder") > 0;
-		if(isQuoteOrder){
-			walletData = {
-				sellerId: sellerId,
-				onPaymentSelect: function(orderReference) {
-					EventBus.trigger("aws-card-selected");
-				},
-				onReady: function(billingAgreement) {
-					var billingAgreementId = billingAgreement.getAmazonBillingAgreementId();
-					window.console.log(billingAgreementId);
-				  },
-				agreementType: 'BillingAgreement',
-				design : {
-					designMode: 'responsive'
-				},
-				onError: function(error) {
-					window.console.log(error.getErrorCode());
-					window.console.log(error.getErrorMessage());
-				}
-			};
-		}
-		else {
-			walletData = {
-				sellerId: sellerId,
-				onPaymentSelect: function(orderReference) {
-					EventBus.trigger("aws-card-selected");
-				},
-				design : {
-					designMode: 'responsive'
-				},
-				onError: function(error) {
-					window.console.log(error.getErrorCode());
-					window.console.log(error.getErrorMessage());
-				}
-			};
-		}
+		var  walletData = {
+			sellerId: sellerId,
+			onPaymentSelect: function(orderReference) {
+				EventBus.trigger("aws-card-selected");
+			},
+			design : {
+				designMode: 'responsive'
+			},
+			onError: function(error) {
+				window.console.log(error.getErrorCode());
+				window.console.log(error.getErrorMessage());
+			}
+		};
 
 		if (awsReferenceId) {
 			divId = "readOnlyWalletWidgetDiv";
