@@ -344,7 +344,8 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
                 if (!memberProduct.validate()) {
                     var fulfillMethod = memberProduct.get('fulfillmentMethod');
                     if (!fulfillMethod) {
-                        fulfillMethod = (memberProduct.get('goodsType') === 'Physical') ? Product.Constants.FulfillmentMethods.SHIP : Product.Constants.FulfillmentMethods.DIGITAL;
+                        fulfillMethod = (memberProduct.get('goodsType') === 'Physical' || memberProduct.get('goodsType') === 'Service') ?
+                            Product.Constants.FulfillmentMethods.SHIP : Product.Constants.FulfillmentMethods.DIGITAL;
                     }
                     var payload = {
                         options: memberProduct.getConfiguredOptions(),
