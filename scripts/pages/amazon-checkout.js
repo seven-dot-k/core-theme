@@ -14,7 +14,12 @@ require(["modules/jquery-mozu","modules/backbone-mozu", "modules/eventbus","unde
 
 			this.listenTo(this.model, "awscheckoutcomplete", function(id){
 				var checkoutUrl = hyprlivecontext.locals.siteContext.generalSettings.isMultishipEnabled ? "/checkoutv2" : "/checkout";
-				window.location = checkoutUrl+"/"+id;
+				
+				var isQuoteOrder = window.location.href.indexOf("quoteOrder") > 0;
+				if(isQuoteOrder)
+					"/checkout/quoteOrder/" + id;
+				else
+				 window.location = checkoutUrl +"/"+id;
 			});
 			
 		},
