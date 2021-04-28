@@ -17,9 +17,9 @@ require(["modules/jquery-mozu","modules/backbone-mozu", "modules/eventbus","unde
 				
 				var isQuoteOrder = window.location.href.indexOf("quoteOrder") > 0;
 				if(isQuoteOrder)
-					"/checkout/quoteOrder/" + id;
+					window.location = "/checkout/quoteOrder/" + id;
 				else
-				 window.location = checkoutUrl +"/"+id;
+				 	window.location = checkoutUrl +"/"+id;
 			});
 			
 		},
