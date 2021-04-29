@@ -29,6 +29,10 @@ require(["modules/jquery-mozu","modules/backbone-mozu", "modules/eventbus","unde
 			if(!isQuoteOrder)
 			{				
 				$("#amazonAddressBookWidgetTD").show();
+				$("#billingTitle").show();
+			}
+			else {
+				$("#shippingAndBillingTitle").show();
 			}
 				
 			AmazonPay.addAddressWidget();
