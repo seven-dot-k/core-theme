@@ -41,6 +41,15 @@
 {% endwith %}
 
 <div class="mz-l-container">
+		<script>
+			var isQuoteOrder = window.location.href.indexOf("quoteOrder") > 0;
+			if(isQuoteOrder) {
+				$("#shippingAndBillingTitle").show();
+			}
+			else {
+				$("#billingTitle").show();
+			}
+		</script>
     <h1 class="mz-pagetitle" id="shippingAndBillingTitle" style="display:none;">
 		{{ labels.awsCheckout }}
     </h1>
