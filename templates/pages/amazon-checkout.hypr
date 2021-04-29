@@ -42,7 +42,7 @@
 
 <div class="mz-l-container">
     <h1 class="mz-pagetitle">
-		{% if model.isQuoteOrder %}
+		{% if model.attributes.originalQuoteId %}
         	{{ labels.awsCheckoutBilling }}
 		{%else%}
 			{{ labels.awsCheckout }}
