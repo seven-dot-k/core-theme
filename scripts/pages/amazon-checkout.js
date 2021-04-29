@@ -31,6 +31,7 @@ require(["modules/jquery-mozu","modules/backbone-mozu", "modules/eventbus","unde
 				$("#amazonAddressBookWidgetTD").show();
 			}
 				
+			this.model.set("isQuoteOrder", isQuoteOrder);
 			AmazonPay.addAddressWidget();
 			AmazonPay.addWalletWidget();
 

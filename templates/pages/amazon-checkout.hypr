@@ -42,7 +42,11 @@
 
 <div class="mz-l-container">
     <h1 class="mz-pagetitle">
-        {{ labels.awsCheckout }}
+		{% if model.isQuoteOrder %}
+        	{{ labels.awsCheckoutBilling }}
+		{%else%}
+			{{ labels.awsCheckout }}
+		{%endif%}
     </h1>
 
     <form id="checkout-form" class="mz-checkoutform mz-l-2column mz-l-2column-right" method="post" onsubmit="return false;" id="amazonCheckout">
