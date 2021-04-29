@@ -43,12 +43,17 @@
 <div class="mz-l-container">
 		<script>
 			var isQuoteOrder = window.location.href.indexOf("quoteOrder") > 0;
+
+			var elementId = '';
 			if(isQuoteOrder) {
-				$("#shippingAndBillingTitle").show();
+				elementId = 'shippingAndBillingTitle';
 			}
 			else {
-				$("#billingTitle").show();
+				elementId = 'billingTitle';
 			}
+
+			var element = document.getElementById(elementId);
+			element.style.display = 'block';
 		</script>
     <h1 class="mz-pagetitle" id="shippingAndBillingTitle" style="display:none;">
 		{{ labels.awsCheckout }}
