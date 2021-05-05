@@ -169,8 +169,13 @@ define(['modules/api',
           //click handler for change store link.launches store picker
           var cartItemId = $(e.currentTarget).data('mz-cart-item');
           var cartItem = this.model.get("items").get(cartItemId);
+          var fulfillmentMethod = cartItem.get('fulfillmentMethod');
           var productCode = cartItem.apiModel.data.product.variationProductCode || cartItem.apiModel.data.product.productCode;
-          this.pickStore(productCode, cartItemId);
+          if(fulfillmentMethod == 'Delivery'){
+            this.pickDelivery(productCode, cartItemId);
+          }else{
+            this.pickStore(productCode, cartItemId);
+          }
         },0),
         pickStore: function(productCode, cartItemId){
           var me = this;
