@@ -275,7 +275,7 @@ define(['modules/api',
                 var deliveryProductCode =
                   cartItem.apiModel.data.product.variationProductCode ||
                   cartItem.apiModel.data.product.productCode;
-                this.pickStore(deliveryProductCode, cartItemId);
+                this.pickDelivery(deliveryProductCode, cartItemId);
               }
 
         },0),
