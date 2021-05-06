@@ -20,10 +20,8 @@ define(["jquery", "underscore"], function ($, _) {
             "(": "^(",
             ")": "^)"
         };
-        var dataSet = new options.model({ pageSize: options.pageSize, filter: options.filterKey + ' ' + options.filterOption1 + ' ' + options.filterValue, sortBy: options.textField + ' ' + 'asc' });
-        if (options.optionalFilter === '') {
-            dataSet = new options.model({ pageSize: options.pageSize, sortBy: options.textField + ' ' + 'asc' });
-        }
+        
+        var dataSet = new options.model({ pageSize: options.pageSize, filter:  options.filters, sortBy: options.textField + ' ' + options.sortDirection });
         dataSet.apiGet().then(function (accounts) {
             lastPageIndex = accounts.data.pageCount;
             var divElm = "";
@@ -45,15 +43,9 @@ define(["jquery", "underscore"], function ($, _) {
                     return specialCharactersObj[match];
                 });
                 inputValue = inputValue.replace(/undefined/g, ' ');
-                var dataSet = new options.model({ startIndex: options.pageSize * pageNumber, pageSize: options.pageSize, filter: options.filterKey + ' ' + options.filterOption1 + ' ' + options.filterValue, sortBy: options.textField + ' ' + 'asc' });
-                if (options.optionalFilter === '') {
-                    dataSet = new options.model({ startIndex: options.pageSize * pageNumber, pageSize: options.pageSize, sortBy: options.textField + ' ' + 'asc' });
-                }
+                var dataSet = new options.model({ startIndex: options.pageSize * pageNumber, pageSize: options.pageSize, filter:  options.filters, sortBy: options.textField + ' ' + options.sortDirection });
                 if (filteredVal) {
-                    dataSet = new options.model({ startIndex: options.pageSize * pageNumber, pageSize: options.pageSize, filter: options.textField + ' ' + options.filterOption + ' "' + inputValue + '" ' + options.optionalFilter + ' ' + options.filterKey + ' ' + options.filterOption1 + ' ' + options.filterValue, sortBy: options.textField + ' ' + 'asc' });
-                    if (options.optionalFilter === '') {
-                        dataSet = new options.model({ startIndex: options.pageSize * pageNumber, pageSize: options.pageSize, filter: options.textField + ' ' + options.filterOption + ' "' + inputValue + '"', sortBy: options.textField + ' ' + 'asc' });
-                    }
+                    dataSet = new options.model({ startIndex: options.pageSize * pageNumber, pageSize: options.pageSize, filter:  options.textField + ' ' + options.filterOption + ' "' + inputValue + '" ' + options.filters, sortBy: options.textField + ' ' + options.sortDirection });
                 }
                 dataSet.apiGet().then(function (accounts) {
                     $('.' + options.pageSelector + '-mz-listData').text('');
@@ -87,6 +79,9 @@ define(["jquery", "underscore"], function ($, _) {
 
             $(document).on('click', '.' + options.pageSelector + '-mz-pagination-url > .prevPage', function (evt) {
                 evt.stopImmediatePropagation();
+                if(pageIndex >= lastPageIndex) {
+                    pageIndex = lastPageIndex - 1;
+                }
                 if (pageIndex >= 1) {
                     $('.' + options.pageSelector + '-mz-pagination-url > .displayPageCount').text((pageIndex + ' of ' + lastPageIndex));
                     pageIndex--;
@@ -137,12 +132,9 @@ define(["jquery", "underscore"], function ($, _) {
                     inputValue = inputValue.replace(/undefined/g, ' ');
                     $('.' + options.pageSelector + '> .mz-dropdown-data').show();
                     clearTimeout(timeout);
-                    var dataSet = new options.model({ filter: options.textField + " " + options.filterOption + " '" + inputValue + '"' + options.optionalFilter + ' ' + options.filterKey + ' ' + options.filterOption1 + ' ' + options.filterValue, pageSize: options.pageSize });
-                    if (options.optionalFilter === "") {
-                        dataSet = new options.model({ filter: options.textField + " " + options.filterOption + " '" + inputValue + '"', pageSize: options.pageSize });
-                    }
+                    var dataSet = new options.model({ filter: options.textField + " " + options.filterOption + " '" + inputValue + '" ' + options.jointFilter + ' ' + options.filters, pageSize: options.pageSize });
                     if (inputValue === "") {
-                        dataSet = new options.model({ pageSize: options.pageSize, sortBy: options.textField + ' ' + 'asc', filter: options.filterKey + ' ' + options.filterOption1 + ' ' + options.filterValue });
+                        dataSet = new options.model({ pageSize: options.pageSize, sortBy: options.textField + ' ' + options.sortDirection, filter: options.filters });
                         filteredVal = false;
                     }
                     $('.' + options.pageSelector + '-mz-listData').scrollTop(0);
