@@ -165,10 +165,7 @@ define([
                         placeHolder: $('#selectb2bAccountGrid > .mz-dd-placeholder').text(),
                         noRecords: $('#selectb2bAccountGrid > .mz-dd-no-records').text(),
                         pageSelector: 'selectb2bAccountGrid',
-                        optionalFilter: 'and ',
-                        filterKey: 'isActive',
-                        filterValue: 'true',
-                        salesRepInfo: {userKey: "salesrep.userid" , userId: ""},
+                        filters: 'isActive eq true',
                         sortDirection: 'asc'
                     });
                 }
