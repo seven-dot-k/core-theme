@@ -195,6 +195,29 @@ define(['modules/api',
           });
 
         },
+        pickDelivery: function(productCode, cartItemId){
+          var me = this;
+          var locationsCollection = new LocationModels.LocationCollection();
+          
+          locationsCollection.apiGetForProduct({productCode: productCode,fulfillmentMethod: 'Delivery'}).then(function(collection){
+            locationsCollection.get('items').forEach(function(item){
+              me.model.get('storeLocationsCache').addLocation({code: item.get('code'), name: item.get('name')});
+            });
+
+            var $bodyElement = $('#mz-location-selector').find('.modal-body');
+            $bodyElement.attr('mz-cart-item', cartItemId);
+            if (collection.length === 0){
+              me.pickerDialog.setBody(Hypr.getLabel("noNearbyLocationsProd"));
+            } else {
+              me.pickerDialog.setBody(me.makeLocationPickerBody(locationsCollection, cartItemId));
+            }
+            me.pickerDialog.show();
+
+          }, function(error){
+            //error
+          });
+
+        },
         getInventoryData: _.debounce(function(id, productCode){
           //Gets basic inventory data based on product code.
           return window.cartView.cartView.model.get('items').get(id).get('product').apiGetInventory({
