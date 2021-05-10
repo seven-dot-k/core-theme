@@ -30,7 +30,10 @@ define(["jquery", "underscore"], function ($, _) {
             });
             $(self.selector).append('<div tabindex="-1" class="' + options.pageSelector + '-mz-listData mz-data-list">' + divElm + '</div>');
             $('<div class="' + options.pageSelector + '-mz-pagination-url mz-pagination-url"><a class="firstPage" data-page-val="0" href="javascript:void(0)"><<</a> <a class="prevPage" href="javascript:void(0)"><</a>  <span class="displayPageCount"> <span clss="count_val">' + (accounts.data.startIndex + 1) + '</span> of ' + lastPageIndex + ' </span> <a class="nextPage" data-pagination="0" href="javascript:void(0)">></a> <a class="lastPage" href="javascript:void(0)">>></a><div class="mz-dd-loading"></div></div>').appendTo(self.selector);
-
+            if (lastPageIndex === 0) {
+                $('.' + options.pageSelector + '-mz-listData').html('<div style="text-align: center">' + options.noRecords + '</div>');
+                $('.pagination_btn').hide();
+            }
             $(document).on('click', '.mz-dd-arrow', function () {
                 $(this).prev('input').focus();
             });
