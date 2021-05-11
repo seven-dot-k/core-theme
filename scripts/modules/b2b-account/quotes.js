@@ -163,7 +163,7 @@ define([
                         placeHolder: $('#selectb2bAccountGrid > .mz-dd-placeholder').text(),
                         noRecords: $('#selectb2bAccountGrid > .mz-dd-no-records').text(),
                         pageSelector: 'selectb2bAccountGrid',
-                        filters: 'isActive eq true',
+                        filters: 'isActive eq true and salesrep.userid eq ' + userId,
                         sortDirection: 'asc'
                     });
                 }
