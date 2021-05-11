@@ -135,7 +135,11 @@ define(["jquery", "underscore"], function ($, _) {
                     inputValue = inputValue.replace(/undefined/g, ' ');
                     $('.' + options.pageSelector + '> .mz-dropdown-data').show();
                     clearTimeout(timeout);
-                    var dataSet = new options.model({ filter: options.textField + " " + options.filterOption + " '" + inputValue + '" ' + options.jointFilter + ' ' + options.filters, pageSize: options.pageSize });
+                    var dataSet = new options.model({ filter: options.textField + " " + options.filterOption + " '" + inputValue + '" ', pageSize: options.pageSize });
+                    if(options.filters !== "") {
+                        var addOptional = 'and ' + options.filters;
+                        dataSet = new options.model({ filter: options.textField + " " + options.filterOption + " '" + inputValue + '" ' + addOptional, pageSize: options.pageSize });
+                    }
                     if (inputValue === "") {
                         dataSet = new options.model({ pageSize: options.pageSize, sortBy: options.textField + ' ' + options.sortDirection, filter: options.filters });
                         filteredVal = false;
