@@ -2123,10 +2123,8 @@
 
                 // skip payment validation, if there are no payments, but run the attributes and accept terms validation.
                 if ( ((nonStoreCreditOrGiftCardTotal > 0 && this.validate() && !hasTokenPayment) || this.validateReviewCheckoutFields()) && ( !this.isNonMozuCheckout() || this.validate().agreeToTerms)) {
-                    if (!this.validate().hasOwnProperty("fulfillmentInfo.shippingMethodCode")) {
-                        this.isSubmitting = false;
-                        return false;
-                    }
+                    this.isSubmitting = false;
+                    return false;
                 }
 
                 this.isLoading(true);
