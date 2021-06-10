@@ -1,4 +1,4 @@
-  {% extends "email/email" %}
+{% extends "email/email" %}
 
   {% block body-content %}
     <br>
@@ -13,24 +13,47 @@
 	{% endif %}
 	</p>
 
-    <p>
-	{% if model.ReturnId %}
-		{{labels.gatewayGiftCardRefundIntro|safe }}	
-	{% else %}
-		{{labels.gatewayGiftCardEmailIntro|string_format(model.Order.Data.Brand, model.Order.Data.SenderName)|safe }}</br></br></br>
-		{% if model.Order.Data.EmailMessage %}
-			<p><b>{{ labels.giftMessage }}{{":"}}</b> <span class="mz-price">{{model.Order.Data.EmailMessage}}</span></p></br></br></br>
-		{% endif %}		
-	{% endif %}	
+	{% if model.IsEcommGiftCard %}	
 		
-	<p><b>{{labels.orderNumber}}{{":"}}</b> <span class="mz-price">{{model.Order.OrderNumber}}</span></p>
-	<p><b>{{labels.giftCardNumber}}{{":"}}</b> {{model.CardNumber}}</span></p>
-	<p><b>{{ labels.giftCardEmailAmount }}</b> <span class="mz-price">{{model.Amount|currency}}</p></b>
-	
+	   {{labels.gatewayGiftCardEmailIntro|string_format(model.Order.Data.Brand, model.Order.Data.SenderName)|safe }}
+	   {% if model.shipment.shopperNotes.giftMessage %}
+			<p><b>{{ labels.giftMessage }}{{":"}}</b> <span class="mz-price">{{model.shipment.shopperNotes.giftMessage}}</span></p>
+	   {% endif %}		
+		
+		<p><b>{{labels.orderNumber}}{{":"}}</b> <span class="mz-price">{{model.Order.OrderNumber}}</span></p>
+		<p><b>{{labels.giftCardNumber}}{{":"}}</b> {{model.CardNumber}}</span></p>
+		<p><b>{{ labels.giftCardEmailAmount }}</b> <span class="mz-price">{{model.Amount|currency}}</p></b>
+		
+		{{ labels.giftCardEmailInstructions|string_format(domainName)|safe }}	
 
-	<b>{{labels.gatewayGiftCardDeleteEmail}}</b>{{labels.gatewayGiftCardNeedsCard}}
+		<b>{{labels.gatewayGiftCardDeleteEmail}}</b>{{labels.gatewayGiftCardNeedsCard}}
 
-	{{ labels.giftCardEmailClosing|string_format(domainName)|safe }}
+		{{ labels.giftCardEmailClosing|string_format(domainName)|safe }}
 
-    
+
+	{% else %}
+		
+		<p>
+		{% if model.ReturnId %}
+			{{labels.gatewayGiftCardRefundIntro|safe }}	
+		{% else %}
+			{{labels.gatewayGiftCardEmailIntro|string_format(model.Order.Data.Brand, model.Order.Data.SenderName)|safe }}
+			{% if model.shipment.shopperNotes.giftMessage %}
+				<p><b>{{ labels.giftMessage }}{{":"}}</b> <span class="mz-price">{{model.shipment.shopperNotes.giftMessage}}</span></p>
+			{% endif %}		
+		{% endif %}	
+		
+		<p><b>{{labels.orderNumber}}{{":"}}</b> <span class="mz-price">{{model.Order.OrderNumber}}</span></p>
+		<p><b>{{labels.giftCardNumber}}{{":"}}</b> {{model.CardNumber}}</span></p>
+		<p><b>{{ labels.giftCardEmailAmount }}</b> <span class="mz-price">{{model.Amount|currency}}</p></b>
+		
+		{% if model.ReturnId %}
+			{{ labels.giftCardEmailInstructions|string_format(domainName)|safe }}
+		{% endif %}
+
+		<b>{{labels.gatewayGiftCardDeleteEmail}}</b>{{labels.gatewayGiftCardNeedsCard}}
+
+		{{ labels.giftCardEmailClosing|string_format(domainName)|safe }}
+
+  	{% endif %}  
 {% endblock body-content %}
