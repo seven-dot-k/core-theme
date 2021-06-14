@@ -16,8 +16,8 @@
 	{% if model.IsEcommGiftCard %}	
 		
 	   {{labels.gatewayGiftCardEmailIntro|string_format(model.Order.Data.Brand, model.Order.Data.SenderName)|safe }}
-	   {% if model.Shipment.ShopperNotes.GiftMessage %}
-			<p><b>{{ labels.giftMessage }}{{":"}}</b> <span class="mz-price">{{model.Shipment.ShopperNotes.GiftMessage}}</span></p>
+	   {% if model.shipment.shopperNotes.giftMessage %}
+			<p><b>{{ labels.giftMessage }}{{":"}}</b> <span class="mz-price">{{model.shipment.shopperNotes.giftMessage}}</span></p>
 	   {% endif %}		
 		
 		<p><b>{{labels.orderNumber}}{{":"}}</b> <span class="mz-price">{{model.Order.OrderNumber}}</span></p>
@@ -38,8 +38,8 @@
 			{{labels.gatewayGiftCardRefundIntro|safe }}	
 		{% else %}
 			{{labels.gatewayGiftCardEmailIntro|string_format(model.Order.Data.Brand, model.Order.Data.SenderName)|safe }}
-			{% if model.Shipment.ShopperNotes.GiftMessage %}
-				<p><b>{{ labels.giftMessage }}{{":"}}</b> <span class="mz-price">{{model.Shipment.ShopperNotes.GiftMessage}}</span></p>
+			{% if model.shipment.shopperNotes.giftMessage %}
+				<p><b>{{ labels.giftMessage }}{{":"}}</b> <span class="mz-price">{{model.shipment.shopperNotes.giftMessage}}</span></p>
 			{% endif %}		
 		{% endif %}	
 		
