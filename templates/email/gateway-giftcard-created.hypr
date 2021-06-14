@@ -47,7 +47,8 @@
 		<p><b>{{labels.giftCardNumber}}{{":"}}</b> {{model.CardNumber}}</span></p>
 		<p><b>{{ labels.giftCardEmailAmount }}</b> <span class="mz-price">{{model.Amount|currency}}</p></b>
 		
-		{% if !model.ReturnId %}
+		{% if model.ReturnId %}
+		{% else %}
 			{{ labels.giftCardEmailInstructions|string_format(domainName)|safe }}
 		{% endif %}
 
