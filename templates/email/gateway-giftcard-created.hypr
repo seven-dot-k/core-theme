@@ -1,3 +1,4 @@
+
 {% extends "email/email" %}
 
   {% block body-content %}
@@ -5,33 +6,14 @@
 
 	{{ labels.giftCardEmailBanner|string_format(domainName)|safe}}
 
+
 	<p>
-	{% if model.Order.billingInfo.billingContact.firstName %}
-		{{ labels.giftCardEmailGreeting|string_format(model.Order.billingInfo.billingContact.firstName, model.Order.billingInfo.billingContact.lastNameOrSurname)|safe }}
+	{% if model.destination.destinationContact.firstName %}
+		{{ labels.giftCardEmailGreeting|string_format(model.destination.destinationContact.firstName, model.destination.destinationContact.lastNameOrSurname)|safe }}
 	{% else %}
 		{{ labels.emailOpeningAlternative|safe }}
 	{% endif %}
 	</p>
-
-	{% if model.IsEcommGiftCard %}	
-		
-	   {{labels.gatewayGiftCardEmailIntro|string_format(model.Order.Data.Brand, model.Order.Data.SenderName)|safe }}
-	   {% if model.GiftMessage %}
-			<p><b>{{ labels.giftMessage }}{{":"}}</b> <span class="mz-price">{{model.GiftMessage}}</span></p>
-	   {% endif %}		
-		
-		<p><b>{{labels.orderNumber}}{{":"}}</b> <span class="mz-price">{{model.Order.OrderNumber}}</span></p>
-		<p><b>{{labels.giftCardNumber}}{{":"}}</b> {{model.CardNumber}}</span></p>
-		<p><b>{{ labels.giftCardEmailAmount }}</b> <span class="mz-price">{{model.Amount|currency}}</p></b>
-		
-		{{ labels.giftCardEmailInstructions|string_format(domainName)|safe }}	
-
-		<b>{{labels.gatewayGiftCardDeleteEmail}}</b>{{labels.gatewayGiftCardNeedsCard}}
-
-		{{ labels.giftCardEmailClosing|string_format(domainName)|safe }}
-
-
-	{% else %}
 		
 		<p>
 		{% if model.ReturnId %}
@@ -44,9 +26,12 @@
 		{% endif %}	
 		
 		<p><b>{{labels.orderNumber}}{{":"}}</b> <span class="mz-price">{{model.Order.OrderNumber}}</span></p>
-		<p><b>{{labels.giftCardNumber}}{{":"}}</b> {{model.CardNumber}}</span></p>
-		<p><b>{{ labels.giftCardEmailAmount }}</b> <span class="mz-price">{{model.Amount|currency}}</p></b>
-		
+
+		{% if model.items.length %}
+			<p><b>{{labels.giftCardNumber}}{{":"}}</b> {{model.items[0].giftCards[0].cardNumber}}</span></p>
+			<p><b>{{ labels.giftCardEmailAmount }}</b> <span class="mz-price">{{model.items[0].giftCards[0].currentBalance|currency}}</p></b>
+		{% endif %}	
+
 		{% if model.ReturnId %}
 		{% else %}
 			{{ labels.giftCardEmailInstructions|string_format(domainName)|safe }}
@@ -55,6 +40,5 @@
 		<b>{{labels.gatewayGiftCardDeleteEmail}}</b>{{labels.gatewayGiftCardNeedsCard}}
 
 		{{ labels.giftCardEmailClosing|string_format(domainName)|safe }}
-
-  	{% endif %}  
+  	
 {% endblock body-content %}
