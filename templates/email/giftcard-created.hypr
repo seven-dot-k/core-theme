@@ -6,8 +6,8 @@
 	{{ labels.giftCardEmailBanner|string_format(domainName)|safe}}
 
 	<p>
-	{% if model.destination.destinationContact.firstName %}
-		{{ labels.giftCardEmailGreeting|string_format(model.destination.destinationContact.firstName, model.destination.destinationContact.lastNameOrSurname)|safe }}
+	{% if model.shipment.destination.destinationContact.firstName %}
+		{{ labels.giftCardEmailGreeting|string_format(model.shipment.destination.destinationContact.firstName, model.shipment.destination.destinationContact.lastNameOrSurname)|safe }}
 	{% else %}
 		{{ labels.emailOpeningAlternative|safe }}
 	{% endif %}

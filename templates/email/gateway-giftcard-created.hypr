@@ -1,4 +1,3 @@
-
 {% extends "email/email" %}
 
   {% block body-content %}
