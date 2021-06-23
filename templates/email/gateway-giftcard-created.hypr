@@ -8,8 +8,8 @@
 
 
 	<p>
-	{% if model.destination.destinationContact.firstName %}
-		{{ labels.giftCardEmailGreeting|string_format(model.destination.destinationContact.firstName, model.destination.destinationContact.lastNameOrSurname)|safe }}
+	{% if model.shipment.destination.destinationContact.firstName %}
+		{{ labels.giftCardEmailGreeting|string_format(model.shipment.destination.destinationContact.firstName, model.shipment.destination.destinationContact.lastNameOrSurname)|safe }}
 	{% else %}
 		{{ labels.emailOpeningAlternative|safe }}
 	{% endif %}
@@ -27,10 +27,13 @@
 		
 		<p><b>{{labels.orderNumber}}{{":"}}</b> <span class="mz-price">{{model.Order.OrderNumber}}</span></p>
 
-		{% if model.items.length %}
-			<p><b>{{labels.giftCardNumber}}{{":"}}</b> {{model.items[0].giftCards[0].cardNumber}}</span></p>
-			<p><b>{{ labels.giftCardEmailAmount }}</b> <span class="mz-price">{{model.items[0].giftCards[0].currentBalance|currency}}</p></b>
-		{% endif %}	
+		{% if model.shipment.items.length %}
+			<p><b>{{labels.giftCardNumber}}{{":"}}</b> {{model.shipment.items[0].giftCards[0].cardNumber}}</span></p>
+			<p><b>{{ labels.giftCardEmailAmount }}</b> <span class="mz-price">{{model.shipment.items[0].giftCards[0].currentBalance|currency}}</p></b>
+		{% else %}
+			<p><b>{{labels.giftCardNumber}}{{":"}}</b> {{model.CardNumber}}</span></p>
+			<p><b>{{ labels.giftCardEmailAmount }}</b> <span class="mz-price">{{model.Amount|currency}}</p>
+		{% endif %}
 
 		{% if model.ReturnId %}
 		{% else %}
