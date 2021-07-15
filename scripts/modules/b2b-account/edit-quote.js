@@ -94,6 +94,7 @@ define([
                         });
                     }
                     self.model.set('allB2bUsers', items);
+                    self.model.render();
                 }, function (error) {
                     self.showMessageBar(error);
                 });
