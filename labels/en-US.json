@@ -630,6 +630,8 @@
   "quoteExpiredBuyerBlob2": "Please submit a new request or contact your sales representative for help",
   "quoteExpiredSeller": "Hi, <br /><br /><br /> Quote \"{0}\" (#{1}) has expired as of",
   "quoteHistory": "Quote History",
+  "quoteShippingMethods": "Shipping Methods",
+  "quoteAddress": "Address",
   "quoteInReview": "Hi, <br /><br /><br />Quote \"{0}\" (#{1}) is now in review. Please review the updates by logging into your account",
   "quoteReadyForCheckout": "Hi, <br /><br /><br /> Quote \"{0}\" (#{1})  is now ready for checkout. Please review the updates by logging into your account",
   "quoteHomePhoneNumber": "Home",
