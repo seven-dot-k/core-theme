@@ -97,7 +97,7 @@
                               </tr>
                               <tr>
                                 {% set shippingMethodName=change.fields|findwhere("name", "ShippingMethodName") %}
-                                <td>{{labels.quoteShippingMethods}}</td>
+                                <td>{{labels.quoteShippingMethod}}</td>
                                 <td class="address">
                                   {% include "modules/b2b-account/quotes/quote-history-field" with name=shippingMethodName.name value=shippingMethodName.oldValue %}
                                 </td>
