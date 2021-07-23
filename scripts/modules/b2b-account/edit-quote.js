@@ -55,7 +55,6 @@ define([
             self.renderProductPicker();
 
             //wire up all the events on controls
-           
             var newProductSubtotal = self.model.apiModel.data.subTotal - self.model.apiModel.data.orderLevelProductDiscountTotal - self.model.apiModel.data.itemLevelProductDiscountTotal;
             self.onQuoteAdjustmentChange('#quoteAdjustmentSection', 'adjustment', newProductSubtotal);
 
@@ -748,20 +747,21 @@ define([
             var self = this;
             var locationsCollection = new LocationModels.LocationCollection();
 
-            locationsCollection.apiGetForProduct({ productCode: productCode }).then(function (collection) {
+            //As Quotes dont depend on Stock, changing it to StorePickup which will return all Pickup Stores that are Active.
+            locationsCollection.apiGetForStorePickup().then(function (collection) {
                 locationsCollection.get('items').forEach(function (item) {
                     self.model.get('storeLocationsCache').addLocation({ code: item.get('code'), name: item.get('name') });
                 });
 
                 var $bodyElement = $('#mz-location-selector').find('.modal-body');
                 $bodyElement.attr('mz-quote-item', quoteItemId);
+                // Keeping this check in case there are no active Store found
                 if (collection.length === 0) {
                     self.pickerDialog.setBody(Hypr.getLabel("noNearbyLocationsProd"));
                 } else {
                     self.pickerDialog.setBody(self.makeLocationPickerBody(locationsCollection, quoteItemId));
                 }
                 self.pickerDialog.show();
-
             }, function (error) {
                 //error
             });
@@ -771,8 +771,6 @@ define([
             var body = "";
 
             locations.items.forEach(function (location) {
-                var stockLevel = location.quantity;
-
                 //Piece together UI for a single location listing
                 var locationSelectDiv = $('<div>', { "class": "location-select-option", "style": "display:flex", "data-mz-quote-item": quoteItemId });
                 var leftSideDiv = $('<div>', { "style": "flex:1" });
@@ -788,29 +786,21 @@ define([
                 leftSideDiv.append($('<div>' + address.cityOrTown + ', ' + address.stateOrProvince + ' ' + address.postalOrZipCode + '</div>'));
                 var $selectButton;
 
-                if (stockLevel > 0) {
-                    leftSideDiv.append("<p class='mz-locationselect-available'>" + Hypr.getLabel("availableNow") + "</p>");
-                    var buttonData = {
-                        locationCode: location.code,
-                        locationName: location.name,
-                        quoteItemId: quoteItemId
-                    };
+                // Removing the storeLevel check as Quotes dont depend on Stock
+                leftSideDiv.append("<p class='mz-locationselect-available'>" + Hypr.getLabel("availableNow") + "</p>");
+                var buttonData = {
+                    locationCode: location.code,
+                    locationName: location.name,
+                    quoteItemId: quoteItemId
+                };
 
-                    $selectButton = $("<button>", { "type": "button", "class": "mz-button mz-store-select-button", "style": "margin:25% 0 0 25%", "aria-hidden": "true", "mz-store-select-data": JSON.stringify(buttonData) });
-                    $selectButton.text(Hypr.getLabel("selectStore"));
-                    rightSideDiv.append($selectButton);
-
-                } else {
-                    leftSideDiv.append("<p class='mz-locationselect-unavailable'>" + Hypr.getLabel("outOfStock") + "</p>");
-                    $selectButton = $("<button>", { "type": "button", "class": "mz-button is-disabled mz-store-select-button", "aria-hidden": "true", "disabled": "disabled", "style": "margin:25% 0 0 25%" });
-                    $selectButton.text(Hypr.getLabel("selectStore"));
-                    rightSideDiv.append($selectButton);
-                }
+                $selectButton = $("<button>", { "type": "button", "class": "mz-button mz-store-select-button", "style": "margin:25% 0 0 25%", "aria-hidden": "true", "mz-store-select-data": JSON.stringify(buttonData) });
+                $selectButton.text(Hypr.getLabel("selectStore"));
+                rightSideDiv.append($selectButton);
 
                 locationSelectDiv.append(leftSideDiv);
                 locationSelectDiv.append(rightSideDiv);
                 body += locationSelectDiv.prop('outerHTML');
-
             });
 
             return body;
@@ -961,7 +951,7 @@ define([
                     //Need this for hypr filters. Hypr filter not working on complex/nested objects.
                     auditHistory[a].createDate = auditHistory[a].auditInfo.createDate;
                     auditHistory[a].createDateLocale = this.getDateInLocaleFormat(auditHistory[a].auditInfo.createDate);
-                    
+
                 }
                 this.model.set('auditHistory', auditHistory);
             }
@@ -990,9 +980,9 @@ define([
                         }
                     }
                 }
-                
+
                 self.model.syncApiModel();
-                self.refreshQuote();  
+                self.refreshQuote(); 
             }, function(error) {
                 self.model.set('shippingMethods', null);
                 $('#selectShippingMethod').val('-1');
@@ -1030,34 +1020,36 @@ define([
                             "address": fulfillmentInfo.fulfillmentContact.address
                         }
                     }));
+            }
+
+            return self.model.apiModel.updateFulfillmentInfo(json).then(function (response) {
+                if (updateMode === applyToDraft) {
+                    self.model.isLoading(false);
+                    self.model.set(response.data);
+                    self.model.set("error", null);
+                    self.model.set("isEditQuoteName", false);
+                    self.model.set("isEditExpirationDate", false);
+                    self.model.set("isEditSubmittedBy", false);
+                    self.model.set('allAdminUsers', null);
+
                 }
-               
-                return self.model.apiModel.updateFulfillmentInfo(json).then(function (response) {
-                    if (updateMode === applyToDraft) {
-                        self.model.isLoading(false);
-                        self.model.set(response.data);
-                        self.model.set("error", null);
-                        self.model.set("isEditQuoteName", false);
-                        self.model.set("isEditExpirationDate", false);
-                        self.model.set("isEditSubmittedBy", false);
-                        self.model.set('allAdminUsers', null);
-   
-                    }
-                    else {
-                        self.exitQuote();
-                    }
-                    self.getAvailableShippingMethods();
-                }, function (error) {
-                    self.showMessageBar(error);
-                });
+                else {
+                    self.exitQuote();
+                }
+                self.getAvailableShippingMethods();
+            }, function (error) {
+                self.showMessageBar(error);
+            });
         },
-      
+
+
         onAddressChange: function (contactId) {
             var self = this;
             var fulfillmentInfo = self.model.get("fulfillmentInfo");
 
             if (contactId === "-1") {
-                    
+
+
 
                 //trying to reset the fulfillmentInfo
                 if (fulfillmentInfo) {
@@ -1099,7 +1091,7 @@ define([
                             if (contacts[i].id == fulfillmentInfo.fulfillmentContact.id) {
                                 contacts[i] = fulfillmentInfo.fulfillmentContact;
                                 isUpdated = true;
-                            }                       
+                            }
                         }
                         //Add newly created address
                         if (!isUpdated) {
