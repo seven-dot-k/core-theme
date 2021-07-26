@@ -755,7 +755,7 @@ define([
 
                 var $bodyElement = $('#mz-location-selector').find('.modal-body');
                 $bodyElement.attr('mz-quote-item', quoteItemId);
-                // Keeping this check in case there are no active Store found
+                // keeping the check as there may be case for no active StorePickup loaction
                 if (collection.length === 0) {
                     self.pickerDialog.setBody(Hypr.getLabel("noNearbyLocationsProd"));
                 } else {
@@ -786,7 +786,7 @@ define([
                 leftSideDiv.append($('<div>' + address.cityOrTown + ', ' + address.stateOrProvince + ' ' + address.postalOrZipCode + '</div>'));
                 var $selectButton;
 
-                // Removing the storeLevel check as Quotes dont depend on Stock
+                // Removing the storeLevel variable and check as Quotes dont depend on Stock level, it can still be selected.
                 leftSideDiv.append("<p class='mz-locationselect-available'>" + Hypr.getLabel("availableNow") + "</p>");
                 var buttonData = {
                     locationCode: location.code,
