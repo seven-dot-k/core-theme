@@ -37,7 +37,7 @@
 				{% if refund.payment.paymentType == "CreditCard" %}
 					{{ refund.payment.billingInfo.card.paymentOrCardType }}
 					{% if refund.payment.billingInfo.card.cCLastFour != null %} 
-							****************{{ refund.payment.billingInfo.card.cCLastFour }}
+							************{{ refund.payment.billingInfo.card.cCLastFour }}
 						{% else %}
 							{{ refund.payment.billingInfo.card.cardNumberPartOrMask }}
 						{% endif %}

@@ -137,7 +137,7 @@
                                 {% if payment.billingInfo.paymentType == "CreditCard" %}
                                      <b>{{ labels.paymentMethod }}</b>: 
 									 {% if payment.billingInfo.card.cCLastFour != null %} 
-                                          ****************{{ payment.billingInfo.card.cCLastFour }}
+                                          ************{{ payment.billingInfo.card.cCLastFour }}
                                             {% else %}
                                             {{ payment.billingInfo.card.cardNumberPartOrMask }}
                                      {% endif %}
