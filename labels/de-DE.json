@@ -669,7 +669,7 @@
   "submitForApproval": "Zur Genehmigung einreichen",
   "submittedBy": "Eingereicht von",
   "subtotal": "Zwischensumme",
-  "subscriptionErroredBlob1": "Der Status Ihres Abonnements Nr. {0} wird auf {1} aktualisiert. Das Abonnement wurde aufgrund eines möglichen Problems mit der Zahlung oder eines anderen Problems in einen fehlerhaften Zustand verschoben. Bitte wenden Sie sich für weitere Einzelheiten an den Kundendienst. Wenn Sie Ihr Abonnement anzeigen oder verwalten möchten, besuchen Sie bitte <a href=\"https://{2}/myaccount\">Mein Konto</a>.", 
+  "subscriptionErroredBlob1": "Bonjour, <br/><br/> Der Status Ihres Abonnements Nr. {0} wird auf {1} aktualisiert. Das Abonnement wurde aufgrund eines möglichen Problems mit der Zahlung oder eines anderen Problems in einen fehlerhaften Zustand verschoben. Bitte wenden Sie sich für weitere Einzelheiten an den Kundendienst. Wenn Sie Ihr Abonnement anzeigen oder verwalten möchten, besuchen Sie bitte <a href=\"https://{2}/myaccount\">Mein Konto</a>.",
   "subtract": "Subtrahieren",
   "subtracted": "Subtrahiert",
   "suggestionNum": "Vorschlag Nr. {0}",
