@@ -337,6 +337,12 @@
       "properties": {},
       "template": "email/subscription-paused",
       "title": "Subscription Paused"
+    },
+    {
+      "id": "subscription.skipped",
+      "properties": {},
+      "template": "email/subscription-skipped",
+      "title": "Subscription Skipped"
     }
   ],
   "backOfficeTemplates": [
