@@ -343,7 +343,14 @@
       "properties": {},
       "template": "email/subscription-skipped",
       "title": "Subscription Skipped"
+    },
+    {
+      "id": "subscription.activated",
+      "properties": {},
+      "template": "email/subscription-created",
+      "title": "Subscription Created"
     }
+
   ],
   "backOfficeTemplates": [
     {

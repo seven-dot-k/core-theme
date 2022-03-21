@@ -1,0 +1,43 @@
+
+<table class="mz-ordersummary subscription-detail">
+   <tr>
+       <td>
+           {{labels.itemTotal}}
+       </td>
+       <td class="subscription-item-total">
+           {{model.itemTotal|currency}}
+       </td>
+   </tr>
+   <tr>
+       <td>
+           {{labels.shippingSubtotal}}
+       </td>
+       <td class="subscription-item-total">
+        {{model.shippingTotal|currency}}
+    </td>
+   </tr>
+<tr>
+    <td>
+        {{labels.handlingSubtotal}}
+    </td>
+    <td class="subscription-item-total">
+     {{model.handlingTotal|currency}}
+ </td>
+</tr>
+<tr>
+    <td>
+        {{labels.duty}}
+    </td>
+    <td class="subscription-item-total">
+     {{model.dutyTotal|currency}}
+ </td>
+</tr>
+<tr>
+    <td>
+        {{labels.subscriptionTotal}}
+    </td>
+    <td class="subscription-item-total">
+     {{model.total|currency}}
+ </td>
+</tr>
+</table>

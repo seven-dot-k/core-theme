@@ -1,0 +1,82 @@
+{% extends "email/email" %}
+{% block body-content %}
+
+<!--- Header --->
+<div class="mz-curbside-email-header">  
+<img src="https://kibocommerce.com/wp-content/themes/kibo/images/logo.png" alt="logo">
+<div class="mz-curbside-header-body">
+    <p><strong>{{ siteContext.generalSettings.websiteName }}</strong></p>
+    <h3>{{ labels.curbsideOrderConfirmationtxt }}</h3>
+</div>
+</div>
+<br/>
+<p>{{ labels.subscriptionActivatedBlob|string_format(siteContext.generalSettings.websiteName, domainName)|safe}}</p>
+
+<!--- Subscription Details Header--->
+<div class="mz-multiship-email" style="width: 100%;">
+    <div class="mz-table-header" style="padding:15px">
+        <span style="font-size:25px">{{ labels.subscriptionDetails }}</span>
+    </div>
+</div>
+
+<div class="mz-store-details">
+    <div>
+        <div><strong> {{ labels.subscriptionNumber }}</strong> : {{ model.number }}</div>
+        <div><strong> {{ labels.subscriptionStatus }}</strong> : {{ model.status }} </div>
+        <div><strong> {{ labels.frequency }}</strong>: {{model.frequency.value}} {{model.frequency.unit|lower}} </div>
+        <div><strong> {{ labels.nextOrderDate }}</strong>: {{model.nextOrderDate|date("m/d/y")}}</div>
+    </div>
+</div>
+<hr/>
+ <br/>
+    <div>
+        <div>
+            <strong>
+                {{labels.shipTo}} :
+            </strong>
+            <br/><br/>
+            <div class="mz-addresssummary">{% include "modules/common/address-summary" with model=model.payment.billingInfo.billingContact %}</div>
+        </div>
+    </div>
+    <br/></br/>
+    <div>
+        <strong>
+        {{labels.shippingMethod}}:
+        </strong> 
+        {{model.fulfillmentInfo.shippingMethodName}}    
+    </div>
+    <br/><br/>
+    <div>
+        <strong>
+        {{labels.paymentMethod}}: 
+        </strong>
+        {% if model.payment.billingInfo.paymentType == 'PurchaseOrder' %} <small>{{ labels.purchaseOrderPaymentTerm }}</small>{{model.payment.billingInfo.purchaseOrder.purchaseOrderNumber}} {% endif %}
+        {% if model.payment.billingInfo.paymentType == 'CreditCard' %} {{model.payment.billingInfo.card.paymentOrCardType}} {{model.payment.billingInfo.card.cardNumberPartOrMask}} {% endif %}
+        {% if model.payment.billingInfo.paymentType == 'Check' %} <small>{{ labels.checkNumber }}</small> {{model.payment.billingInfo.check.checkNumber}} {% endif %}
+        {% if model.payment.billingInfo.paymentType == "StoreCredit" %}
+            <small>{{ labels.digitalCreditCode }}</small>
+            <div>{{ model.payment.billingInfo.storeCreditCode }}</div>
+        {% endif %}
+        {% if model.payment.billingInfo.paymentType == "GiftCard" %}
+            <small>{{ labels.cardNumber }}</small>
+            <div>{{ model.payment.billingInfo.card.cardNumberPartOrMask|default("****************") }}</div>
+        {% endif %}
+        {% if model.payment.paymentType|lower == "token" %}
+            <div class="mz-l-stack-item">
+                {% if model.payment.billingInfo.token.type|lower == "paywithamazon" %}
+                    <small>{{ labels.paymentMethod }}</small>
+                    <div>{{ labels.payWithAmazon }}</div>
+                {% endif %}
+                {% if model.payment.billingInfo.token.type|lower == "applepay" %}
+                    <small>{{ labels.paymentMethod }}</small>
+                    <div>{{ labels.applePay }}</div>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+<br/>
+<br/>
+    {% include "modules/common/subscription-item-list" %}
+
+{% endblock body-content %}
