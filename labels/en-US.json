@@ -811,6 +811,7 @@
   "subscriptionPausedBlob1": "Hello! <br/><br/> The status of your subscription #{0} is updated to {1}. If you would like to view or manage your subscription, please visit My Account.",
   "subscriptionSkippedBlob1": "As you requested, your subscription #{0} was skipped. The next order date on your subscription will be {1}. If you would like to view or manage your subscription, please visit My Account.",
   "subscriptionActivatedBlob": "Hello, <br/><br/> Thank you for shopping with us at {0}. Your subscription was updated. If you would like to view or manage your subscription, please visit My Account.",
+  "subscriptionCancelledBlob1": "Hello!<br/><br/>The status of your subscription #{0} is updated to {1}. If you would like to view or manage your subscription, please visit <a href=\"https://{2}/myaccount\">My Account</a>.",
   "subscriptionDetails": "Subscription Details",
   "subscriptionNumber": "Subscription #",
   "subscriptionStatus": "Subscription Status",
