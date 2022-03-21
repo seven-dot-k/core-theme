@@ -331,6 +331,12 @@
       "properties": {},
       "template": "email/subscription-errored",
       "title": "Subscription Errored"
+    },
+    {
+      "id": "subscription.paused",
+      "properties": {},
+      "template": "email/subscription-paused",
+      "title": "Subscription Paused"
     }
   ],
   "backOfficeTemplates": [
