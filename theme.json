@@ -347,8 +347,8 @@
     {
       "id": "subscription.activated",
       "properties": {},
-      "template": "email/subscription-created",
-      "title": "Subscription Created"
+      "template": "email/subscription-activated",
+      "title": "Subscription Activated"
     }
 
   ],

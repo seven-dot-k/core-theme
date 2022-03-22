@@ -1,0 +1,23 @@
+{% extends "email/email" %}
+{% block body-content %}
+
+<!--- Header --->
+<div class="mz-curbside-email-header">  
+<img src="https://kibocommerce.com/wp-content/themes/kibo/images/logo.png" alt="logo">
+<div class="mz-curbside-header-body">
+    <p><strong>{{ siteContext.generalSettings.websiteName }}</strong></p>
+    <h3>{{ labels.curbsideOrderConfirmationtxt }}</h3>
+</div>
+</div>
+<br/>
+<p>{{ labels.subscriptionActivatedBlob|string_format(siteContext.generalSettings.websiteName, domainName)|safe}}</p>
+
+<!--- Subscription Details Header--->
+    {% include "modules/common/subscription-details" %}
+<br/>
+<br/>
+    {% include "modules/common/subscription-item-list" %}
+    
+    {% include "modules/common/subscription-order-summary" %}
+
+{% endblock body-content %}
