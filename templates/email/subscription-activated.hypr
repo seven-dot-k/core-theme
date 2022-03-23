@@ -11,4 +11,6 @@
     
     {% include "modules/common/subscription-summary" %}
 
+    {{ labels.emailClosing|string_format(siteContext.generalSettings.websiteName)|safe }}
+
 {% endblock body-content %}
