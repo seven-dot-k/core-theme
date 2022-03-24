@@ -4,17 +4,16 @@
     </div>
 </div>
 
-<div class="mz-store-details">
+<div class="mz-store-details subscription-info">
     <div>
-        <div><strong> {{ labels.subscriptionNumber }}</strong> : {{ model.number }}</div>
-        <div><strong> {{ labels.subscriptionStatus }}</strong> : {{ model.status }} </div>
-        <div><strong> {{ labels.frequency }}</strong>: {{model.frequency.value}} {{model.frequency.unit|lower}} </div>
+        <div><strong> {{ labels.subscriptionNumber }}</strong> : {{ model.number }}</div><br/>
+        <div><strong> {{ labels.subscriptionStatus }}</strong> : {{ model.status }} </div><br/>
+        <div><strong> {{ labels.frequency }}</strong>: {{model.frequency.value}} {{model.frequency.unit|lower}} </div><br/>
         <div><strong> {{ labels.nextOrderDate }}</strong>: {{model.nextOrderDate|date("m/d/y")}}</div>
     </div>
 </div>
-<hr/>
- <br/>
-    <div>
+
+    <div class="subscription-info">
         <div>
             <strong>
                 {{labels.shipTo}} :
@@ -25,7 +24,7 @@
     </div>
     <br/></br/>
     {% if model.fulfillmentInfo.shippingMethodName %}
-    <div>
+    <div class="subscription-info">
         <strong>
         {{labels.shippingMethod}}:
         </strong> 
@@ -33,7 +32,7 @@
     </div>
     <br/><br/>
     {% endif %}
-    <div>
+    <div class="subscription-info">
         <strong>
         {{labels.paymentMethod}}: 
         </strong>
