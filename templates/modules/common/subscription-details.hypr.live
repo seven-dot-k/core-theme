@@ -19,7 +19,7 @@
                 {{labels.shipTo}} :
             </strong>
             <br/><br/>
-            <div class="mz-addresssummary">{% include "modules/common/address-summary" with model=model.payment.billingInfo.billingContact %}</div>
+            <div class="mz-addresssummary">{% include "modules/common/address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}</div>
         </div>
     </div>
     <br/></br/>
