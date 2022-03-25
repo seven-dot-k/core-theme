@@ -36,7 +36,7 @@
         <strong>
         {{labels.paymentMethod}}: 
         </strong>
-        {% if model.payment.billingInfo.paymentType == 'PurchaseOrder' %} {{ label.purchaseOrder }}<br/>
+        {% if model.payment.billingInfo.paymentType == 'PurchaseOrder' %} {{ labels.purchaseOrder }}<br/>
             <b>{{ labels.purchaseOrderNumber }}</b>:{{model.payment.billingInfo.purchaseOrder.purchaseOrderNumber}} 
         {% endif %}
         {% if model.payment.billingInfo.paymentType == 'CreditCard' %} {{model.payment.billingInfo.card.paymentOrCardType}} {{model.payment.billingInfo.card.cardNumberPartOrMask}} {% endif %}
