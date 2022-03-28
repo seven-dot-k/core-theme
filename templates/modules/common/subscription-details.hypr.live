@@ -12,7 +12,7 @@
         <div><strong> {{ labels.nextOrderDate }}</strong>: {{model.nextOrderDate|date("m/d/y")}}</div>
     </div>
 </div>
-
+{% if model.fulfillmentInfo.fulfillmentContact %}
     <div class="subscription-info">
         <div>
             <strong>
@@ -23,6 +23,7 @@
         </div>
     </div>
     <br/></br/>
+{% endif %}
     {% if model.fulfillmentInfo.shippingMethodName %}
     <div class="subscription-info">
         <strong>
