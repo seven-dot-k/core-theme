@@ -52,7 +52,9 @@
     <tr>
         <td>
             {{ labels.tax }}
-                <span class="subscription-item-total">{{ model.itemTaxTotal|currency }}</span>
+        </td>
+        <td class="subscription-item-total">
+               {{ model.itemTaxTotal|currency }}
         </td>
     </tr>
 {% endif %}
@@ -61,7 +63,9 @@
     <tr>
         <td>
             {{ shippingDiscount.discount.discount.name }}
-                <span class="subscription-item-total">-{{ shippingDiscount.discount.impact|currency }}</span>
+        </td>
+        <td class="subscription-item-total">
+                -{{ shippingDiscount.discount.impact|currency }}
         </td>
     </tr>
 {% endfor %}
