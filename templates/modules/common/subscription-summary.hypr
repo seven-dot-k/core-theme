@@ -18,13 +18,13 @@
             {{ model.subTotal|currency }}
        </td>
    </tr>
-   {% if model.shippingSubTotal %}
+   {% if model.shippingTotal %}
     <tr>
         <td>
             {{labels.shippingHandling}}
         </td>
         <td class="subscription-item-total">
-                {{model.shippingSubTotal|currency}}
+                {{model.shippingTotal|currency}}
             </td>
     </tr>
     {% endif %}
