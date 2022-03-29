@@ -355,6 +355,12 @@
       "properties": {},
       "template": "email/subscription-errored",
       "title": "Subscription Errored"
+    },
+    {
+      "id": "subscription.frequencychanged",
+      "properties": {},
+      "template": "email/subscription-frequency-changed",
+      "title": "Subscription Frequency Updated"
     }
   ],
   "backOfficeTemplates": [
