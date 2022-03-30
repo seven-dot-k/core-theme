@@ -367,7 +367,14 @@
       "properties": {},
       "template": "email/subscription-next-order-date-updated",
       "title": "Subscription Next Order Date Updated"
+    },
+    {
+      "id": "subscription.fulfillmentinfoupdated",
+      "properties": {},
+      "template": "email/subscription-fulfillment-info-updated",
+      "title": "Subscription Shipping Info Updated"
     }
+
   ],
   "backOfficeTemplates": [
     {
