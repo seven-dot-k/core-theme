@@ -111,8 +111,7 @@
     });
 
     $(document).ready(function () {
-        var product = ProductModels.Product.fromCurrent();
-
+        var product = ProductModels.Product.fromCurrent();        
         product.on('addedtocart', function (cartitem, stopRedirect) {
             if (cartitem && cartitem.prop('id')) {
                 product.isLoading(true);
