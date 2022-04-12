@@ -1,5 +1,5 @@
 
-<table class="mz-ordersummary subscription-detail">
+<table class="mz-ordersummary subscription-detail" align="right">
     {% for discount in model.orderDiscounts %}
         {% if not discount.excluded %}
             <tr>

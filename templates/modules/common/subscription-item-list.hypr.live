@@ -1,4 +1,4 @@
-<table class="mz-ordersummary subscription-detail">
+<table width="100%" cellpadding="1" class="mz-ordersummary subscription-detail" align="right">
     <thead>
         <tr>
             <th class="mz-ordersummary-header-product">{{ labels.line }}</th>
