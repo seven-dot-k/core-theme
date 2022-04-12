@@ -1,11 +1,11 @@
 <table cellpadding="1" class="mz-ordersummary subscription-detail" style="width: 100%;">
     <thead>
         <tr>
-            <th class="mz-ordersummary-header-product" style="text-align: center;">{{ labels.line }}</th>
-            <th class="mz-ordersummary-header-product" style="text-align: center;">{{ labels.product }}</th>
-            <th class="mz-ordersummary-header-qty" style="text-align: center;">{{ labels.qty }}</th>
-            <th class="mz-ordersummary-header-each" style="text-align: left;">{{ labels.each }}</th>
-            <th class="mz-ordersummary-header-total" style="text-align: left;">{{ labels.total }}</th>
+            <th class="mz-ordersummary-header-product" style="text-align: left;">{{ labels.line }}</th>
+            <th class="mz-ordersummary-header-product" style="text-align: left;">{{ labels.product }}</th>
+            <th class="mz-ordersummary-header-qty">{{ labels.qty }}</th>
+            <th class="mz-ordersummary-header-each">{{ labels.each }}</th>
+            <th class="mz-ordersummary-header-total">{{ labels.total }}</th>
         </tr>
     </thead>
     <tbody>
