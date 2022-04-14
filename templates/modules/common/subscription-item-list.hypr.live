@@ -25,10 +25,10 @@
                     </span>
                 </td>
                 <td style="text-align: right;padding: 15px;">
-                    {% include "modules/common/item-price" %}
+                    {% include "modules/common/email-item-price" %}
                 </td>
                 <td style="text-align: right;padding: 15px;">
-                    {% include "modules/common/item-total" %}
+                    {% include "modules/common/email-item-total" %}
                 </td>
             </tr>  
         {% endfor %}
