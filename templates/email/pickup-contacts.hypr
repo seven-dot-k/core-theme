@@ -1,7 +1,7 @@
 <table>
 		<tbody>
             <tr>
-                <td width="20%" style="padding: 0 !important;"> 
+                <td width="30%" style="padding: 0 !important;"> 
                     <b>{{ labels.pickupContact }}:</b> <br>
                     {% if model.fulfillmentInfo and model.fulfillmentInfo.fulfillmentContact %} 
                         {{ model.fulfillmentInfo.fulfillmentContact.firstName }} {{ model.fulfillmentInfo.fulfillmentContact.lastNameOrSurname }} <br>
@@ -31,7 +31,7 @@
                         {% endif %}
                     {% endif %}
                 </td>
-                <td width="20%" style="padding: 0 !important;">
+                <td width="30%" style="padding: 0 !important;">
                     {% if model.alternateContact %}
                         <b>{{ labels.alternatePickupContact }}:</b> <br>
                         {{ model.alternateContact.firstName }} {{ model.alternateContact.lastNameOrSurname }} <br>
