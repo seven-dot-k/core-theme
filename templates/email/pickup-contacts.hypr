@@ -1,0 +1,38 @@
+<table class="mz-ordersummary">
+		<tbody>
+            <tr>
+                <td width="20%"> 
+                    <b>{{ labels.pickupContact }}:</b> <br>
+                    {% if order.fulfillmentInfo && order.fulfillmentInfo.fulfillmentContact %} 
+                        {{ order.fulfillmentInfo.fulfillmentContact.firstName }} {{ order.fulfillmentInfo.fulfillmentContact.lastNameOrSurname }} <br>
+                        {{ order.fulfillmentInfo.fulfillmentContact.email }} <br>
+                        
+                        {% if order.fulfillmentInfo.fulfillmentContact.phoneNumbers && order.fulfillmentInfo.fulfillmentContact.phoneNumbers.mobile %}
+                            {{ order.fulfillmentInfo.fulfillmentContact.phoneNumbers.mobile }}
+                        {% elif order.fulfillmentInfo.fulfillmentContact.phoneNumbers && order.fulfillmentInfo.fulfillmentContact.phoneNumbers.home %}
+                            {{ order.fulfillmentInfo.fulfillmentContact.phoneNumbers.home }}
+                        {% endif %}
+                    {% elif order.billingInfo && order.billingInfo.billingContact %}
+                        {{ order.billingInfo.billingContact.firstName }} {{ order.billingInfo.billingContact.lastNameOrSurname }} <br>
+                        {{ order.billingInfo.billingContact.email }} <br>
+                        
+                        {% if order.billingInfo.billingContact.phoneNumbers && order.billingInfo.billingContact.phoneNumbers.mobile %}
+                            {{ order.billingInfo.billingContact.phoneNumbers.mobile }}
+                        {% elif order.billingInfo.billingContact.phoneNumbers && order.billingInfo.billingContact.phoneNumbers.home %}
+                            {{ order.billingInfo.billingContact.phoneNumbers.home }}
+                        {% endif %}
+                    {% else %}
+                        {{ order.email }}
+                    {% endif %}
+                </td>
+                <td width="20%">                    
+                    {% if order.alternateContact %}
+                        <b>{{ labels.alternatePickupContact }}:</b> <br>
+                        {{ order.alternateContact.firstName }} {{ order.alternateContact.lastNameOrSurname }} <br>
+                        {{ order.alternateContact.emailAddress }} <br>
+                        {{ order.alternateContact.phoneNumber }}
+                    {% endif %}
+                </td>
+            </tr>
+		</tbody>
+</table>
