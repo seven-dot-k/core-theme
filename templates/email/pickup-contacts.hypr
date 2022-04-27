@@ -1,36 +1,42 @@
-<table class="mz-ordersummary">
+<table>
 		<tbody>
             <tr>
-                <td width="20%"> 
+                <td width="20%" style="padding: 0 !important;"> 
                     <b>{{ labels.pickupContact }}:</b> <br>
-                    {% if order.fulfillmentInfo && order.fulfillmentInfo.fulfillmentContact %} 
-                        {{ order.fulfillmentInfo.fulfillmentContact.firstName }} {{ order.fulfillmentInfo.fulfillmentContact.lastNameOrSurname }} <br>
-                        {{ order.fulfillmentInfo.fulfillmentContact.email }} <br>
+                    {% if model.fulfillmentInfo and model.fulfillmentInfo.fulfillmentContact %} 
+                        {{ model.fulfillmentInfo.fulfillmentContact.firstName }} {{ model.fulfillmentInfo.fulfillmentContact.lastNameOrSurname }} <br>
+                        {{ model.fulfillmentInfo.fulfillmentContact.email }} <br>
                         
-                        {% if order.fulfillmentInfo.fulfillmentContact.phoneNumbers && order.fulfillmentInfo.fulfillmentContact.phoneNumbers.mobile %}
-                            {{ order.fulfillmentInfo.fulfillmentContact.phoneNumbers.mobile }}
-                        {% elif order.fulfillmentInfo.fulfillmentContact.phoneNumbers && order.fulfillmentInfo.fulfillmentContact.phoneNumbers.home %}
-                            {{ order.fulfillmentInfo.fulfillmentContact.phoneNumbers.home }}
+                        {% if model.fulfillmentInfo.fulfillmentContact.phoneNumbers and model.fulfillmentInfo.fulfillmentContact.phoneNumbers.mobile %}
+                            {{ model.fulfillmentInfo.fulfillmentContact.phoneNumbers.mobile }}
+                        {% else %}
+                            {% if model.fulfillmentInfo.fulfillmentContact.phoneNumbers and model.fulfillmentInfo.fulfillmentContact.phoneNumbers.home %}
+                                {{ model.fulfillmentInfo.fulfillmentContact.phoneNumbers.home }}
+                            {% endif %}
                         {% endif %}
-                    {% elif order.billingInfo && order.billingInfo.billingContact %}
-                        {{ order.billingInfo.billingContact.firstName }} {{ order.billingInfo.billingContact.lastNameOrSurname }} <br>
-                        {{ order.billingInfo.billingContact.email }} <br>
+                    {% else %}    
+                        {% if model.billingInfo and model.billingInfo.billingContact %}
+                            {{ model.billingInfo.billingContact.firstName }} {{ model.billingInfo.billingContact.lastNameOrSurname }} <br>
+                            {{ model.billingInfo.billingContact.email }} <br>
                         
-                        {% if order.billingInfo.billingContact.phoneNumbers && order.billingInfo.billingContact.phoneNumbers.mobile %}
-                            {{ order.billingInfo.billingContact.phoneNumbers.mobile }}
-                        {% elif order.billingInfo.billingContact.phoneNumbers && order.billingInfo.billingContact.phoneNumbers.home %}
-                            {{ order.billingInfo.billingContact.phoneNumbers.home }}
+                            {% if model.billingInfo.billingContact.phoneNumbers and model.billingInfo.billingContact.phoneNumbers.mobile %}
+                                {{ model.billingInfo.billingContact.phoneNumbers.mobile }}
+                            {% else %}
+                                {% if model.billingInfo.billingContact.phoneNumbers and model.billingInfo.billingContact.phoneNumbers.home %}
+                                    {{ model.billingInfo.billingContact.phoneNumbers.home }}
+                                {% endif %}
+                            {% endif %}
+                        {% else %}
+                            {{ model.email }}
                         {% endif %}
-                    {% else %}
-                        {{ order.email }}
                     {% endif %}
                 </td>
-                <td width="20%">                    
-                    {% if order.alternateContact %}
+                <td width="20%" style="padding: 0 !important;">
+                    {% if model.alternateContact %}
                         <b>{{ labels.alternatePickupContact }}:</b> <br>
-                        {{ order.alternateContact.firstName }} {{ order.alternateContact.lastNameOrSurname }} <br>
-                        {{ order.alternateContact.emailAddress }} <br>
-                        {{ order.alternateContact.phoneNumber }}
+                        {{ model.alternateContact.firstName }} {{ model.alternateContact.lastNameOrSurname }} <br>
+                        {{ model.alternateContact.emailAddress }} <br>
+                        {{ model.alternateContact.phoneNumber }}
                     {% endif %}
                 </td>
             </tr>
