@@ -45,7 +45,7 @@
                 {% endblock location-hours %}
 
             <br><br>
-            {% include "email/pickup-contacts" with model=model %}
+            {% include "modules/common/pickup-contacts" with model=model %}
 
             <!--- Item Details --->
             <p>{{ labels.curbsidePickupReadyBlob|safe }}</p>
@@ -129,7 +129,7 @@
 
                             {% if model.hasPickupItems %}
                                 <br><br>
-                                {% include "email/pickup-contacts" with model=model %}
+                                {% include "modules/common/pickup-contacts" with model=model %}
                             {% endif %}
                         </td>
                     </tr>

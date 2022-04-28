@@ -8,7 +8,7 @@
     
     {% if model.hasPickupItems %}
         <br><br>
-        {% include "email/pickup-contacts" with model=model %}
+        {% include "modules/common/pickup-contacts" with model=model %}
         <br>
     {% endif %}
     <br>
