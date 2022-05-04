@@ -30,25 +30,25 @@
                     {% else %}    
                         {% if model.billingInfo and model.billingInfo.billingContact %}
                             <div>
-                                {% if model.fulfillmentInfo.fulfillmentContact.firstName %}
-                                    {{ model.fulfillmentInfo.fulfillmentContact.firstName }} 
+                                {% if model.billingInfo.billingContact.firstName %}
+                                    {{ model.billingInfo.billingContact.firstName }} 
                                 {% endif %}
-
-                                {% if model.fulfillmentInfo.fulfillmentContact.lastNameOrSurname %}
-                                    {{ model.fulfillmentInfo.fulfillmentContact.lastNameOrSurname }}
+f
+                                {% if model.billingInfo.billingContact.lastNameOrSurname %}
+                                    {{ model.billingInfo.billingContact.lastNameOrSurname }}
                                 {% endif %}
                             </div>
 
-                            {% if model.fulfillmentInfo.fulfillmentContact.email %}
-                                <div>{{ model.fulfillmentInfo.fulfillmentContact.email }}</div>
+                            {% if model.billingInfo.billingContact.email %}
+                                <div>{{ model.billingInfo.billingContact.email }}</div>
                             {% endif %}
                     
                         
-                            {% if model.fulfillmentInfo.fulfillmentContact.phoneNumbers and model.fulfillmentInfo.fulfillmentContact.phoneNumbers.mobile %}
-                                <div>{{ model.fulfillmentInfo.fulfillmentContact.phoneNumbers.mobile }}</div>
+                            {% if model.billingInfo.billingContact.phoneNumbers and model.billingInfo.billingContact.phoneNumbers.mobile %}
+                                <div>{{ model.billingInfo.billingContact.phoneNumbers.mobile }}</div>
                             {% else %}
-                                {% if model.fulfillmentInfo.fulfillmentContact.phoneNumbers and model.fulfillmentInfo.fulfillmentContact.phoneNumbers.home %}
-                                <div>{{ model.fulfillmentInfo.fulfillmentContact.phoneNumbers.home }}</div>
+                                {% if model.billingInfo.billingContact.phoneNumbers and model.billingInfo.billingContact.phoneNumbers.home %}
+                                <div>{{ model.billingInfo.billingContact.phoneNumbers.home }}</div>
                                 {% endif %}
                             {% endif %}
                         {% else %}
@@ -74,6 +74,7 @@
                         {% if model.alternateContact.emailAddress %}
                             <div>{{ model.alternateContact.emailAddress }}</div>
                         {% endif %}
+                        
                         {% if model.alternateContact.phoneNumber %}
                             <div>{{ model.alternateContact.phoneNumber }}</div>
                         {% endif %}
